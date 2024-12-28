@@ -1,5 +1,5 @@
 # Use the latest available Ubuntu image as build stage
-FROM ubuntu:bionic AS builder
+FROM ubuntu:bionic as builder
 
 #Add ppa:bitcoin/bitcoin repository so we can install libdb4.8 libdb4.8++
 RUN apt-get update && \
@@ -31,8 +31,9 @@ RUN set -ex \
   && rm -rf /opt/neobytes-${VERSION}/bin/neobytes-qt
 
 # Use latest Ubuntu image as base for main image
-FROM ubuntu:bionic AS final
-LABEL maintainer="SikkieNL (@sikkienl)"
+FROM ubuntu:bionic as final
+LABEL author="Kyle Manna <kyle@kylemanna.com>" \
+      maintainer="SikkieNL (@sikkienl)"
 
 WORKDIR /neobytes
 
@@ -47,20 +48,23 @@ COPY --chown=neobytes:neobytes --from=builder /opt/neobytes/bin/ /usr/local/bin/
 
 # Upgrade all packages and install dependencies
 RUN apt-get update \
-  && apt-get upgrade -y
-RUN DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends gosu \
-  && apt clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    && apt-get upgrade -y
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends gosu \
+    && apt clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Copy scripts to Docker image
 COPY ./bin ./docker-entrypoint.sh /usr/local/bin/
 
-VOLUME ["/neobytes/.neobytes"]
+# Enable entrypoint script
+ENTRYPOINT ["docker-entrypoint.sh"]
 
 # Set HOME
 ENV HOME=/neobytes
 
+# Expose default p2p and RPC ports
 EXPOSE 1427 1428 11427 11428 11444
 
-ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
+# Expose default neobytesd storage location
+VOLUME ["/neobytes/.neobytes"]
 
 CMD ["nby_oneshot"]
