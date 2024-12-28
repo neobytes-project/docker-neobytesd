@@ -1,5 +1,5 @@
 # Use the latest available Ubuntu image as build stage
-FROM ubuntu:bionic as builder
+FROM ubuntu:bionic AS builder
 
 #Add ppa:bitcoin/bitcoin repository so we can install libdb4.8 libdb4.8++
 RUN apt-get update && \
@@ -31,7 +31,7 @@ RUN set -ex \
   && rm -rf /opt/neobytes-${VERSION}/bin/neobytes-qt
 
 # Use latest Ubuntu image as base for main image
-FROM ubuntu:bionic as final
+FROM ubuntu:bionic AS final
 LABEL author="Kyle Manna <kyle@kylemanna.com>" \
       maintainer="SikkieNL (@sikkienl)"
 
