@@ -29,7 +29,7 @@ RUN set -ex \
   && rm -rf /opt/neobytes-${VERSION}/bin/neobytes-qt
 
 # Use latest Ubuntu image as base for main image
-FROM ubuntu:bionic
+FROM ubuntu:bionic AS final
 LABEL maintainer="SikkieNL (@sikkienl)"
 
 ENTRYPOINT ["docker-entrypoint.sh"]
@@ -45,7 +45,7 @@ RUN groupadd -g ${GROUP_ID} neobytes \
    && useradd -u ${USER_ID} -g neobytes -d /neobytes neobytes
 
 # Copy over neobytes binaries
-COPY --from=build /opt/ /opt/
+COPY --from=builder /opt/ /opt/
 
 # Upgrade all packages and install dependencies
 RUN apt-get update \
