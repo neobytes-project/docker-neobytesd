@@ -16,3 +16,16 @@ on:
       name: "Build image with cache"
       runs-on: ubuntu-18.04
       steps:
+        - 
+            name: Set up QEMU
+            uses: docker/setup-qemu-action@v3.2.0
+            with:
+              platforms: linux/arm64
+        - 
+            name: Set up Docker Buildx
+            uses: docker/setup-buildx-action@v3.8.0
+        - 
+            name: Checkout repository
+            uses: actions/checkout@v4
+        - 
+    
