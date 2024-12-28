@@ -19,6 +19,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
 
 # Set variables necessary for download and verification of neobytesd
 ARG VERSION=0.12.1.1
+ENV NEOBYTES_DATA=/neobytes/.neobytes
+ENV PATH=/opt/neobytes-${VERSION}/bin:$PATH
 
 # Download Neobytes repository
 RUN set -ex \
@@ -32,10 +34,6 @@ RUN set -ex \
 FROM ubuntu:bionic AS final
 LABEL maintainer="SikkieNL (@sikkienl)"
 
-ENTRYPOINT ["docker-entrypoint.sh"]
-ENV HOME=/neobytes
-EXPOSE 1427 1428 11427 11428 11444
-VOLUME ["/neobytes/.neobytes"]
 WORKDIR /neobytes
 
 # Set neobytes user and group with static IDs
@@ -45,15 +43,24 @@ RUN groupadd -g ${GROUP_ID} neobytes \
    && useradd -u ${USER_ID} -g neobytes -d /neobytes neobytes
 
 # Copy over neobytes binaries
-COPY --from=builder /opt/ /opt/
+COPY --chown=neobytes:neobytes --from=builder /opt/neobytes/bin/ /usr/local/bin/
 
 # Upgrade all packages and install dependencies
 RUN apt-get update \
-  && apt install -y --no-install-recommends gosu libatomic1 \
-  && apt clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-  && ln -sv /opt/neobytes/bin/* /usr/local/bin
+  && apt-get upgrade -y
+RUN DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends gosu \
+  && apt clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Copy scripts to Docker image
 COPY ./bin ./docker-entrypoint.sh /usr/local/bin/
+
+VOLUME ["/neobytes/.neobytes"]
+
+# Set HOME
+ENV HOME=/neobytes
+
+EXPOSE 1427 1428 11427 11428 11444
+
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 
 CMD ["nby_oneshot"]

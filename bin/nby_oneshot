@@ -3,7 +3,7 @@
 set -ex
 
 # Generate neobytes.conf
-btc_init
+nby_init
 
 # Default / no argument invocation listens for RPC commands and has to accept non-localhost because of
 # Docker port proxying or Docker private networking.
