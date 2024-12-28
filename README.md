@@ -3,6 +3,19 @@ Neobytesd for Docker
 
 Docker image that runs the Neobytes neobytesd node in a container for easy deployment.
 
+***Note: Credit for this image goes almost entirely to https://github.com/kylemanna/docker-bitcoind, I have added some optimizations and wanted a way to keep more easily up to date.***
+
+
+Requirements
+------------
+
+* Physical machine, cloud instance, or VPS that supports Docker (i.e. [Vultr](http://bit.ly/1HngXg0), [Digital Ocean](http://bit.ly/18AykdD), KVM or XEN based VMs) running Ubuntu 14.04 or later (*not OpenVZ containers!*)
+* At least 500 GB to store the block chain files (and always growing!)
+* At least 1 GB RAM + 2 GB swap file
+
+Recommended and tested on unadvertised (only shown within control panel) [Vultr SATA Storage 1024 MB RAM/250 GB disk instance @ $10/mo](http://bit.ly/vultrbitcoind).  Vultr
+
+
 Quick Start
 -----------
 
@@ -26,3 +39,8 @@ Quick Start
 
 4. Install optional init scripts for upstart and systemd are in the `init` directory.
 
+
+Documentation
+-------------
+
+* Additional documentation in the [docs folder](docs).
