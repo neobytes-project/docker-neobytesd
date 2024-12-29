@@ -32,28 +32,9 @@ RUN set -ex \
 
 # Use latest Ubuntu image as base for main image
 FROM ubuntu:bionic AS final
+
 LABEL author="Kyle Manna <kyle@kylemanna.com>" \
       maintainer="SikkieNL (@sikkienl)"
-
-WORKDIR /neobytes
-
-# Set neobytes user and group with static IDs
-ARG GROUP_ID=1000
-ARG USER_ID=1000
-RUN groupadd -g ${GROUP_ID} neobytes \
-   && useradd -u ${USER_ID} -g neobytes -d /neobytes neobytes
-
-# Copy over neobytes binaries
-COPY --chown=neobytes:neobytes --from=builder /opt/neobytes/bin/ /usr/local/bin/
-
-# Upgrade all packages and install dependencies
-RUN apt-get update \
-    && apt-get upgrade -y
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends gosu \
-    && apt clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-# Copy scripts to Docker image
-COPY ./bin ./docker-entrypoint.sh /usr/local/bin/
 
 # Enable entrypoint script
 ENTRYPOINT ["docker-entrypoint.sh"]
@@ -66,5 +47,25 @@ EXPOSE 1427 1428 11427 11428 11444
 
 # Expose default neobytesd storage location
 VOLUME ["/neobytes/.neobytes"]
+
+WORKDIR /neobytes
+
+# Set neobytes user and group with static IDs
+ARG GROUP_ID=1000
+ARG USER_ID=1000
+RUN groupadd -g ${GROUP_ID} neobytes \
+   && useradd -u ${USER_ID} -g neobytes -d /neobytes neobytes
+
+# Copy over neobytes binaries
+COPY --from=builder /opt/ /opt/
+
+# Upgrade all packages and install dependencies
+RUN apt update \
+  && apt install -y --no-install-recommends gosu libatomic1 \
+  && apt clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+  && ln -sv /opt/neobytes/bin/* /usr/local/bin
+
+# Copy scripts to Docker image
+COPY ./bin ./docker-entrypoint.sh /usr/local/bin/
 
 CMD ["nby_oneshot"]
