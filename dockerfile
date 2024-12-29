@@ -10,8 +10,8 @@ RUN apt-get update && \
 #Install build dependencies
 RUN apt-get update && \
   apt-get upgrade -y
-# RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-	RUN apt-get install -y bash build-essential libtool autotools-dev automake git wget\
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+	bash build-essential libtool autotools-dev automake git wget\
 	pkg-config libssl-dev libevent-dev bsdmainutils python3 \
 	libboost-system-dev libboost-filesystem-dev libboost-chrono-dev \
 	libboost-program-options-dev libboost-test-dev libboost-thread-dev \
