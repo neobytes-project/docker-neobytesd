@@ -18,9 +18,6 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
 	libminiupnpc-dev libzmq3-dev libdb4.8-dev libdb4.8++-dev && \
 	apt-get clean
 
-  sudo apt-get install libminiupnpc-dev
-  sudo apt-get install libzmq3-dev
-
 # Set variables necessary for download and verification of neobytesd
 ARG VERSION=0.12.1.1
 ENV NEOBYTES_DATA=/neobytes/.neobytes
