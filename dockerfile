@@ -31,7 +31,8 @@ RUN set -ex \
   && rm -rf /opt/neobytes-${VERSION}/bin/neobytes-qt
 
 # Use latest Ubuntu image as base for main image
-FROM ubuntu:bionic AS final
+#FROM ubuntu:bionic AS final
+FROM ubuntu:bionic
 
 LABEL author="Kyle Manna <kyle@kylemanna.com>" \
       maintainer="SikkieNL (@sikkienl)"
@@ -57,8 +58,7 @@ RUN groupadd -g ${GROUP_ID} neobytes \
    && useradd -u ${USER_ID} -g neobytes -d /neobytes neobytes
 
 # Copy over neobytes binaries
-#COPY --from=builder /opt/ /opt/
-COPY --from=final /opt/ /opt/
+COPY --from=builder /opt/ /opt/
 
 # Upgrade all packages and install dependencies
 RUN apt update \
