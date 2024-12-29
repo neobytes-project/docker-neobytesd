@@ -44,7 +44,7 @@ ENTRYPOINT ["docker-entrypoint.sh"]
 ENV HOME=/neobytes
 
 # Expose default p2p and RPC ports
-EXPOSE 1427 1428 11427 11428 11444
+EXPOSE 1427 1428 11427 11428 11444 21427
 
 # Expose default neobytesd storage location
 VOLUME ["/neobytes/.neobytes"]
