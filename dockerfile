@@ -70,3 +70,4 @@ RUN apt update \
 COPY ./bin ./docker-entrypoint.sh /usr/local/bin/
 
 CMD ["nby_oneshot"]
+
