@@ -33,6 +33,6 @@ jobs:
       - name: Run Docker buildx
         run: |
           docker buildx build \
-          --platform linux/amd64,linux/arm64,linux/arm/v7 \
+          --platform ubuntu:18.04 \
           --tag sikkienl/neobytesd:latest \
           --output "type=registry" .
