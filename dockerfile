@@ -57,7 +57,8 @@ RUN groupadd -g ${GROUP_ID} neobytes \
    && useradd -u ${USER_ID} -g neobytes -d /neobytes neobytes
 
 # Copy over neobytes binaries
-COPY --from=builder /opt/ /opt/
+#COPY --from=builder /opt/ /opt/
+COPY --from=final /opt/ /opt/
 
 # Upgrade all packages and install dependencies
 RUN apt update \
