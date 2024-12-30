@@ -19,5 +19,3 @@
 You can also attach bash into running container to debug running neobytesd
 
     docker exec -it neobytesd-node bash -l
-
-
