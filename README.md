@@ -1,10 +1,9 @@
 Neobytesd for Docker
 ====================
 
+[![Docker Stats](http://dockeri.co/image/sikkienl/neobytesd)](https://hub.docker.com/r/sikkienl/neobytesd/)
+
 Docker image that runs the Neobytes neobytesd node in a container for easy deployment.
-
-***Note: Credit for this image goes almost entirely to https://github.com/kylemanna/docker-bitcoind, I have added some optimizations and wanted a way to keep more easily up to date.***
-
 
 Requirements
 ------------
@@ -44,3 +43,10 @@ Documentation
 -------------
 
 * Additional documentation in the [docs folder](docs).
+
+
+Credits
+-------
+
+Original work by Kyle Manna [https://github.com/kylemanna/docker-bitcoind](https://github.com/kylemanna/docker-bitcoind).
+Modified to use Neobytes Core instead of Bitcoin Core.
