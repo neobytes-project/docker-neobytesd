@@ -34,5 +34,5 @@ jobs:
         run: |
           docker buildx build \
           --platform linux/amd64,linux/arm64 \
-          --tag sikkienl/neobytesd:latest \
+          --tag neobytes/neobytesd:latest \
           --output "type=registry" .
