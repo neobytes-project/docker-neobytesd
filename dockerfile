@@ -25,7 +25,7 @@ ENV PATH=/opt/neobytes-${VERSION}/bin:$PATH
 
 # Download Neobytes repository
 RUN set -ex \
-  && wget -q --show-progress --progress=dot:giga https://gitea.sikkiesnet.com/neobytes-project/neobytes/releases/download/v${VERSION}/neobytes-${VERSION}-linux64.tar.gz \
+  && wget -q --show-progress --progress=dot:giga https://git.sikkiesnet.com/neobytes-project/neobytes/releases/download/v${VERSION}/neobytes-${VERSION}-linux64.tar.gz \
   && tar -xzvf neobytes-${VERSION}-linux64.tar.gz -C /opt \
   && ln -sv neobytes-${VERSION} /opt/neobytes \
   && rm *.tar.gz \
