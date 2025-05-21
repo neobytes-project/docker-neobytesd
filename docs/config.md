@@ -11,7 +11,7 @@ You can use environment variables to customize config ([see docker run environme
             -e PRINTTOCONSOLE=1 \
             -e RPCUSER=mysecretrpcuser \
             -e RPCPASSWORD=mysecretrpcpassword \
-            sikkienl/neobytesd
+            neobytes/neobytesd
 
 Or you can use your very own config file like that:
 
@@ -19,5 +19,5 @@ Or you can use your very own config file like that:
             -p 1428:1428 \
             -p 127.0.0.1:1427:1427 \
             -v /etc/neobytes.conf:/neobytes/.neobytes/neobytes.conf \
-            sikkienl/neobytesd
+            neobytes/neobytesd
             

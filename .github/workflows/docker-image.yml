@@ -1,5 +1,8 @@
 name: Build on master push
 
+env:
+  VERSION: 0.12.1.1
+
 on:
   push:
     branches:
@@ -35,4 +38,11 @@ jobs:
           docker buildx build \
           --platform linux/amd64,linux/arm64 \
           --tag neobytes/neobytesd:latest \
+          --output "type=registry" .
+
+      - name: Run Docker buildx ${{ env.VERSION }}
+        run: |
+          docker buildx build \
+          --platform linux/amd64,linux/arm64 \
+          --tag neobytes/neobytesd:${{ env.VERSION }} \
           --output "type=registry" .

@@ -1,6 +1,6 @@
 [Unit]
 Description=Neobytesd Docker Container
-Documentation=https://github.com/sikkienl/docker-neobytesd
+Documentation=https://github.com/neobytes-project/docker-neobytesd
 Requires=docker.service
 After=docker.service
 
@@ -11,7 +11,7 @@ Restart=always
 # Modify IP6_PREFIX to match network config
 Environment="NAME=neobytesd"
 Environment="DATA_VOL=neobytesd-data"
-Environment="IMG=sikkienl/neobytesd:dev"
+Environment="IMG=neobytes/neobytesd:latest"
 Environment="PORT=1428:1428/tcp"
 
 # To override environment variables, use local configuration directory:
