@@ -1,8 +1,5 @@
 name: Build on master push
 
-env:
-  VERSION: 0.12.1.1
-
 on:
   push:
     branches:
@@ -10,6 +7,7 @@ on:
 
 env:
   DOCKER_CLI_EXPERIMENTAL: enabled
+  VERSION: 0.12.1.1
 
 jobs:
   build:
