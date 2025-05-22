@@ -14,7 +14,7 @@
 
 *Note:* This container will be run in the same way as the neobytesd node, but will not connect to already running containers or processes.
 
-    docker run -v neobytesd-data:/neobytes --rm -it sikkienl/neobytesd bash -l
+    docker run -v neobytesd-data:/neobytes --rm -it neobytes/neobytesd bash -l
 
 You can also attach bash into running container to debug running neobytesd
 

@@ -19,7 +19,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
 	apt-get clean
 
 # Set variables necessary for download and verification of neobytesd
-ARG VERSION=0.12.1.2
+ARG VERSION=0.12.1.1
 ENV NEOBYTES_DATA=/neobytes/.neobytes
 ENV PATH=/opt/neobytes-${VERSION}/bin:$PATH
 
@@ -66,4 +66,4 @@ RUN apt update \
 # Copy scripts to Docker image
 COPY ./bin ./docker-entrypoint.sh /usr/local/bin/
 
-CMD ["neobytes_oneshot"]
+CMD ["nby_oneshot"]

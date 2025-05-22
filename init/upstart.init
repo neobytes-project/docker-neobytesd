@@ -11,5 +11,5 @@ pre-start script
   docker pull neobytes/neobytesd || true
 end script
 script
-  exec docker run --rm -v neobytesd-data:/neobytes --name=neobytesd-node --rm -p 1428:1428 -p 127.0.0.1:1427:1427 sikkienl/neobytesd
+  exec docker run --rm -v neobytesd-data:/neobytes --name=neobytesd-node --rm -p 1428:1428 -p 127.0.0.1:1427:1427 neobytes/neobytesd
 end script

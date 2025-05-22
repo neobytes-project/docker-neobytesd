@@ -28,7 +28,7 @@ Quick Start
 
         $ docker ps
         CONTAINER ID        IMAGE                         COMMAND             CREATED             STATUS              PORTS                                              NAMES
-        d0e1076b2dca        neobytes/neobytesd:latest     "neobytes_oneshot"       2 seconds ago       Up 1 seconds        127.0.0.1:1427->1427/tcp, 0.0.0.0:148->1428/tcp   neobytesd-node
+        d0e1076b2dca        neobytes/neobytesd:latest     "nby_oneshot"       2 seconds ago       Up 1 seconds        127.0.0.1:1427->1427/tcp, 0.0.0.0:148->1428/tcp   neobytesd-node
 
 3. You can then access the daemon's output thanks to the [docker logs command]( https://docs.docker.com/reference/commandline/cli/#logs)
 
