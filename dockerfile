@@ -37,18 +37,6 @@ RUN set -ex \
 LABEL author="Kyle Manna <kyle@kylemanna.com>" \
       maintainer="SikkieNL (@sikkienl)"
 
-# Enable entrypoint script
-ENTRYPOINT ["docker-entrypoint.sh"]
-
-# Set HOME
-ENV HOME=/neobytes
-
-# Expose default p2p and RPC ports
-EXPOSE 1427 1428 11427 11428 11444 21427
-
-# Expose default neobytesd storage location
-VOLUME ["/neobytes/.neobytes"]
-
 WORKDIR /neobytes
 
 # Set neobytes user and group with static IDs
@@ -65,5 +53,17 @@ RUN apt update \
 
 # Copy scripts to Docker image
 COPY ./bin ./docker-entrypoint.sh /usr/local/bin/
+
+# Enable entrypoint script
+ENTRYPOINT ["docker-entrypoint.sh"]
+
+# Set HOME
+ENV HOME=/neobytes
+
+# Expose default p2p and RPC ports
+EXPOSE 1427 1428 11427 11428 11444 21427
+
+# Expose default neobytesd storage location
+VOLUME ["/neobytes/.neobytes"]
 
 CMD ["nby_oneshot"]
