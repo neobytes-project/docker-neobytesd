@@ -57,6 +57,8 @@ ARG USER_ID=1000
 RUN groupadd -g ${GROUP_ID} neobytes \
    && useradd -u ${USER_ID} -g neobytes -d /neobytes neobytes
 
+COPY --from=build /opt/ /opt/
+
 # Upgrade all packages and install dependencies
 RUN apt update \
   && apt install -y --no-install-recommends gosu libatomic1 \
