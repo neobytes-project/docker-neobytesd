@@ -53,6 +53,7 @@ RUN apt update \
 
 # Copy scripts to Docker image
 COPY ./bin ./docker-entrypoint.sh /usr/local/bin/
+RUN chmod a+x /usr/local/bin/*
 
 # Enable entrypoint script
 ENTRYPOINT ["docker-entrypoint.sh"]
