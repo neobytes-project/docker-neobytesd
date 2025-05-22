@@ -7,6 +7,8 @@ on:
 
 env:
   DOCKER_CLI_EXPERIMENTAL: enabled
+  VERSION: 0.12.1.1
+  IMAGE_NAME: neobytes/neobytesd
 
 jobs:
   build:
@@ -30,9 +32,16 @@ jobs:
         uses: docker/setup-buildx-action@v1
         id: buildx
 
-      - name: Run Docker buildx
+      - name: Run Docker build latest
         run: |
           docker buildx build \
           --platform linux/amd64,linux/arm64 \
-          --tag neobytes/neobytesd:latest \
+          --tag ${{ env.IMAGE_NAME }}:latest \
+          --output "type=registry" .
+
+      - name: Run Docker build ${{ env.VERSION }}
+        run: |
+          docker buildx build \
+          --platform linux/amd64,linux/arm64 \
+          --tag ${{ env.IMAGE_NAME }}:${{ env.VERSION }} \
           --output "type=registry" .
