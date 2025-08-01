@@ -19,7 +19,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
 	apt-get clean
 
 # Set variables necessary for download and verification of neobytesd
-ARG VERSION=0.12.2.0
+ARG VERSION=0.12.2.1
 ENV NEOBYTES_DATA=/neobytes/.neobytes
 ENV PATH=/opt/neobytes-${VERSION}/bin:$PATH
 
